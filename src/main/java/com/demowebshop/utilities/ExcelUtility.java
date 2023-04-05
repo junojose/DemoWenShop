@@ -32,7 +32,7 @@ public class ExcelUtility {
 	        throw new RuntimeException(e);
 	    }
 	    sh = wb.getSheet(sheetName);
-	    List<ArrayList<String>> excelRows = new ArrayList<>();
+	    List<ArrayList<String>> excelRows = new ArrayList<ArrayList<String>>();
 	    int rowCount = sh.getLastRowNum() - sh.getFirstRowNum();
 	    for (int i = 0; i < rowCount + 1; i++) {
 	        int x = 0;
@@ -42,7 +42,7 @@ public class ExcelUtility {
 	            columnList[j] = formatter.formatCellValue(row.getCell(x));
 	            x++;
 	        }
-	        excelRows.add(new ArrayList<>(Arrays.asList(columnList)));
+	        excelRows.add(new ArrayList<String>(Arrays.asList(columnList)));
 	    }
 	    return excelRows;
 	}
@@ -74,6 +74,5 @@ public class ExcelUtility {
 	    }
 	    return data;
 	}
-	
 	
 }
