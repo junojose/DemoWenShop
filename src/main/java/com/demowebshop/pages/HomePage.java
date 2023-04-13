@@ -3,7 +3,7 @@ package com.demowebshop.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.PageFactory;   
 
 import com.demowebshop.utilities.RandomUtility;
 import com.demowebshop.utilities.TestHelperUtility;
@@ -26,6 +26,10 @@ public class HomePage extends TestHelperUtility {
 	private final String _subMessage = "newsletter-result-block";
 	@FindBy(id = _subMessage)
 	private WebElement subMessage;
+	private final String _loginLink = "//a[@class='ico-login']";
+	@FindBy(xpath = _loginLink)
+	private WebElement loginLink;
+
 
 	public String getHomePageTitle() {
 		String title = page.getPageTitle(driver);
@@ -47,6 +51,17 @@ public class HomePage extends TestHelperUtility {
 		wait.waitForElementToBeVisible(driver, _subMessage,WaitUtility.LocatorType.Id);
 		String message=page.getElementText(subMessage);
 		return message;
+	}
+	public LoginPage clickLoginLink()
+	{
+		page.clickOnElement(loginLink);
+		return new LoginPage(driver);
+	}
+	public RegisterPage clickRegisterButton()
+	{
+	
+		page.clickOnElement(loginLink);
+		return new UserAccountPage(driver);
 	}
 
 }
