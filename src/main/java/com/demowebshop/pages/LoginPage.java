@@ -10,10 +10,12 @@ import com.demowebshop.utilities.WaitUtility;
 
 public class LoginPage extends TestHelperUtility {
 	public WebDriver driver;
+
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
+
 	private final String _emailField = "//input[@id='Email']";
 	@FindBy(xpath = _emailField)
 	private WebElement emailField;
@@ -26,31 +28,34 @@ public class LoginPage extends TestHelperUtility {
 	private final String _errorMessage = "//span[text()='Login was unsuccessful. Please correct the errors and try again.']";
 	@FindBy(xpath = _errorMessage)
 	private WebElement errorMessage;
-public String loginPageTitle()
-{
-	String title=page.getPageTitle(driver);
-	return title;
-}
-public void enterEmail(String emailId)
-{
-	page.enterText(emailField, emailId);
-}
-public void enterPassword(String pswd)
-{
-	page.enterText(passwordField, pswd);
-}
-public void clickOnLoginButton()
-{
-	page.clickOnElement(logInButton);
-}
-public String getErrorMessage()
-{
-	wait.setHardWait();
-	wait.waitForElementToBeVisible(driver, _errorMessage,WaitUtility.LocatorType.Xpath);
-	String errMessage=page.getElementText(errorMessage);
-	return errMessage;
-	
-}
 
+	public String loginPageTitle() {
+		String title = page.getPageTitle(driver);
+		return title;
+	}
+
+	public void enterEmail(String emailId) {
+		page.enterText(emailField, emailId);
+	}
+
+	public void enterPassword(String pswd) {
+		page.enterText(passwordField, pswd);
+	}
+
+	public void clickOnLoginButton() {
+		page.clickOnElement(logInButton);
+	}
+
+	public String getErrorMessage() {
+		wait.setHardWait();
+		wait.waitForElementToBeVisible(driver, _errorMessage, WaitUtility.LocatorType.Xpath);
+		String errMessage = page.getElementText(errorMessage);
+		return errMessage;
+	}
+
+	public UserAccountPage clickLoginButton() {
+		page.clickOnElement(logInButton);
+		return new UserAccountPage(driver);
+	}
 
 }
